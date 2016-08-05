@@ -29,12 +29,12 @@ io.on('connection', function(socket){
   });
   socket.on('prev', function(data){
     console.log('prev');
-    omx_process.write(',');
+    omx_process.stdout.write(',');
   });
   socket.on('next', function(data){
     console.log('next');
     // cp.exec('>', cpLog);
-    omx_process.write('.');
+    omx_process.stdout.write('.');
   });
 
   console.log('socket connected.');
