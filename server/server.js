@@ -21,14 +21,14 @@ app.get('/', function(res, req){
 io.on('connection', function(socket){
   socket.on('play', function(data){
     console.log('play');
-    var args = [];
+    var args = ['-track 6'];
     var options = { cwd: undefined, env: process.env };
     // console.log('process.env.PATH:', process.env.PATH );
     if(child){
       child.stdin.write('q', errorLog);
     } else {
-      console.log('track=' + trackNumber + ' cdplayer.sh');
-      child = cp.spawn('track=' + trackNumber + ' cdplayer.sh', args, options).on('error', function( err ){ throw err });
+      // console.log('track=' + trackNumber + ' cdplayer.sh');
+      child = cp.spawn('cdplayer.sh', args, options).on('error', function( err ){ throw err });
     }
     child.stdout.on('data', function(data) {
       console.log('stdout: ' + data);
