@@ -1,1 +1,3 @@
-console.log('loaded.');
+var socket = io();
+
+console.log('loaded.', socket);
