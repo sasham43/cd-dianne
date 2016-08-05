@@ -21,7 +21,7 @@ app.get('/', function(res, req){
 io.on('connection', function(socket){
   socket.on('play', function(data){
     console.log('play');
-    var args = ['-track', '6'];
+    var args = ['-track', trackNumber];
     var options = { cwd: undefined, env: process.env };
     // console.log('process.env.PATH:', process.env.PATH );
     if(child){
