@@ -1,3 +1,5 @@
-var socket = io();
+$(function(){
+  var socket = io();
 
-console.log('loaded.', socket);
+  console.log('loaded.', socket);
+})

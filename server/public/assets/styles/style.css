@@ -6,3 +6,27 @@ body{
 h1{
   text-align: center;
 }
+
+button{
+  height: 25rem;
+}
+
+.play{
+  background-color: rebeccapurple;
+  color: white;
+}
+
+.eject{
+  background-color: black;
+  color: white;
+}
+
+.prev{
+  background-color: red;
+  color: white;
+}
+
+.next{
+  background-color: blue;
+  color: white;
+}
