@@ -49,7 +49,7 @@ io.on('connection', function(socket){
         cp.exec('eject /dev/cdrom', errorLog);
       });
     } else {
-      cp.exec('eject /dev/cdrom', cpLog);
+      cp.exec('eject /dev/cdrom', errorLog);
     }
     trackNumber = 0;
   });
