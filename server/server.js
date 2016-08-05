@@ -20,7 +20,7 @@ app.get('/', function(res, req){
 io.on('connection', function(socket){
   socket.on('play', function(data){
     console.log('play');
-    omx_process = cp.spawn('~/omxcdplayer');
+    omx_process = cp.exec('~/omxcdplayer', cpLog);
   });
 
   socket.on('eject', function(data){
@@ -28,11 +28,11 @@ io.on('connection', function(socket){
     cp.exec('eject /dev/cdrom', cpLog);
   });
   socket.on('prev', function(data){
-    console.log('prev');
+    console.log('prev', omx_process);
     omx_process.stdout.write(',');
   });
   socket.on('next', function(data){
-    console.log('next');
+    console.log('next', omx_process);
     // cp.exec('>', cpLog);
     omx_process.stdout.write('.');
   });
