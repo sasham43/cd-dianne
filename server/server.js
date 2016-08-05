@@ -29,12 +29,20 @@ io.on('connection', function(socket){
   });
   socket.on('prev', function(data){
     console.log('prev', omx_process);
-    omx_process.stdout.write(',');
+    omx_process.stdout.write(',', function(error){
+      if(error){
+        console.log('error writing to stream', error);
+      }
+    });
   });
   socket.on('next', function(data){
     console.log('next', omx_process);
     // cp.exec('>', cpLog);
-    omx_process.stdout.write('.');
+    omx_process.stdout.write('.', function(error){
+      if(error){
+        console.log('error writing to stream', error);
+      }
+    });
   });
 
   console.log('socket connected.');
