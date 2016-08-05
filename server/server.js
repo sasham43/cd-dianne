@@ -10,6 +10,7 @@ var port = 3001;
 
 
 var child;
+var trackNumber = 0;
 
 app.use(express.static('server/public'));
 
@@ -26,7 +27,7 @@ io.on('connection', function(socket){
     if(child){
       child.stdin.write('q', errorLog);
     } else {
-      child = cp.spawn('cdplayer.sh', args, options).on('error', function( err ){ throw err });
+      child = cp.spawn('track= ' + trackNumber + 'cdplayer.sh', args, options).on('error', function( err ){ throw err });
     }
     child.stdout.on('data', function(data) {
       console.log('stdout: ' + data);
@@ -49,15 +50,18 @@ io.on('connection', function(socket){
     } else {
       cp.exec('eject /dev/cdrom', cpLog);
     }
+    trackNumber = 0;
   });
   socket.on('prev', function(data){
     console.log('prev');
     child.stdin.write('<', errorLog);
+    trackNumber--;
   });
   socket.on('next', function(data){
     console.log('next');
     // cp.exec('>', cpLog);
     child.stdin.write('>', errorLog);
+    trackNumber++;
   });
 
   console.log('socket connected.');
