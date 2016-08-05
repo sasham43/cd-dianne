@@ -27,6 +27,7 @@ io.on('connection', function(socket){
     if(child){
       child.stdin.write('q', errorLog);
     } else {
+      console.log('track=' + trackNumber + ' cdplayer.sh');
       child = cp.spawn('track=' + trackNumber + ' cdplayer.sh', args, options).on('error', function( err ){ throw err });
     }
     child.stdout.on('data', function(data) {
