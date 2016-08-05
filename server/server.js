@@ -23,7 +23,7 @@ io.on('connection', function(socket){
     var args = [];
     var options = { cwd: undefined, env: process.env };
     // console.log('process.env.PATH:', process.env.PATH );
-    if(child.stdin){
+    if(child){
       child.stdin.write('q', errorLog);
     } else {
       child = cp.spawn('cdplayer.sh', args, options).on('error', function( err ){ throw err });
