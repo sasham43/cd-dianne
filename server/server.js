@@ -23,38 +23,40 @@ io.on('connection', function(socket){
     var args = [];
     var options = { cwd: undefined, env: process.env };
     // console.log('process.env.PATH:', process.env.PATH );
-    child = cp.spawn('cdplayer.sh', args, options).on('error', function( err ){ throw err });
+    if(child.stdin){
+      child.stdin.write('q', errorLog);
+    } else {
+      child = cp.spawn('cdplayer.sh', args, options).on('error', function( err ){ throw err });
+    }
     child.stdout.on('data', function(data) {
-    console.log('stdout: ' + data);
+      console.log('stdout: ' + data);
     });
     child.stderr.on('data', function(data) {
-        console.log('stdout: ' + data);
+      console.log('stdout: ' + data);
     });
     child.on('close', function(code) {
-        console.log('closing code: ' + code);
+      console.log('closing code: ' + code);
     });
   });
 
   socket.on('eject', function(data){
     console.log('eject');
-    cp.exec('eject /dev/cdrom', cpLog);
+    if(child.stdin){
+      child.stdin.write('q', function(){
+        cp.exec('eject /dev/cdrom', errorLog);
+      });
+    } else {
+      cp.exec('eject /dev/cdrom', cpLog);
+    }
   });
   socket.on('prev', function(data){
     console.log('prev');
-    child.stdin.write('<', function(error){
-      if(error){
-        console.log('error writing to stream', error);
-      }
-    });
+    child.stdin.write('<', errorLog);
   });
   socket.on('next', function(data){
     console.log('next');
     // cp.exec('>', cpLog);
-    child.stdin.write('>', function(error){
-      if(error){
-        console.log('error writing to stream', error);
-      }
-    });
+    child.stdin.write('>', errorLog);
   });
 
   console.log('socket connected.');
@@ -63,12 +65,8 @@ io.on('connection', function(socket){
 
 server.listen(port);
 
-function cpLog(error, stdout, stderr){
+function errorLog(error){
   if(error){
-    console.error('error:', error);
-    return;
+    console.log('error writing to child.stdin:', error);
   }
-
-  console.log('stdout:', stdout);
-  console.log('stderr:', stderr);
 }
