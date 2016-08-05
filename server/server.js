@@ -15,7 +15,7 @@ app.get('/', function(res, req){
 io.on('connection', function(socket){
   socket.on('play', function(data){
     console.log('play');
-    cp.exec('omxcdplayer', cpLog);
+    cp.exec('~/omxcdplayer', cpLog);
   });
 
   socket.on('eject', function(data){
