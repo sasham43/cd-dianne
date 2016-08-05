@@ -1,5 +1,8 @@
 var express = require('express');
 var cp = require('child_process');
+var robot = require('kbm-robot');
+
+robot.startJar();
 
 var app = express();
 var server = require('http').Server(app);
@@ -24,11 +27,19 @@ io.on('connection', function(socket){
   });
   socket.on('prev', function(data){
     console.log('prev');
-    cp.exec('<', cpLog);
+    //cp.exec('<', cpLog);
+    robot.type(',')
+    //.then(function(){
+    //   console.log('prev go');
+    // });
   });
   socket.on('next', function(data){
     console.log('next');
-    cp.exec('>', cpLog);
+    //cp.exec('>', cpLog);
+    robot.type('.')
+    //.then(function(){
+    //   console.log('next go');
+    // });
   });
 
   console.log('socket connected.');
