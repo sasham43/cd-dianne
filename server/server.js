@@ -41,7 +41,7 @@ io.on('connection', function(socket){
   });
   socket.on('prev', function(data){
     console.log('prev');
-    child.stdout.write('<', function(error){
+    child.stdin.write('<', function(error){
       if(error){
         console.log('error writing to stream', error);
       }
@@ -50,7 +50,7 @@ io.on('connection', function(socket){
   socket.on('next', function(data){
     console.log('next');
     // cp.exec('>', cpLog);
-    child.stdout.write('>', function(error){
+    child.stdin.write('>', function(error){
       if(error){
         console.log('error writing to stream', error);
       }
