@@ -37,12 +37,12 @@ io.on('connection', function(socket){
 
 server.listen(port);
 
-cpLog = (error, stdout, stderr) => {
+function cpLog(error, stdout, stderr){
   if(error){
-    console.error(`error: ${error}`);
+    console.error('error:', error);
     return;
   }
 
-  console.log(`stdout: ${stdout}`);
-  console.log(`stderr: ${stderr}`);
+  console.log('stdout:', stdout);
+  console.log('stderr:', stderr);
 }
