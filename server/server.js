@@ -8,6 +8,9 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var port = 3001;
 
+
+  var omx_process;
+
 app.use(express.static('server/public'));
 
 app.get('/', function(res, req){
@@ -17,7 +20,7 @@ app.get('/', function(res, req){
 io.on('connection', function(socket){
   socket.on('play', function(data){
     console.log('play');
-    cp.exec('~/omxcdplayer', cpLog);
+    omx_process = cp.exec('~/omxcdplayer', cpLog);
   });
 
   socket.on('eject', function(data){
@@ -26,12 +29,12 @@ io.on('connection', function(socket){
   });
   socket.on('prev', function(data){
     console.log('prev');
-    process.stdout.write(',');
+    omx_process.write(',');
   });
   socket.on('next', function(data){
     console.log('next');
     // cp.exec('>', cpLog);
-    process.stdout.write('.');
+    omx_process.write('.');
   });
 
   console.log('socket connected.');
