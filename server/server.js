@@ -20,10 +20,10 @@ app.get('/', function(res, req){
 io.on('connection', function(socket){
   socket.on('play', function(data){
     console.log('play');
-    var args = ['omxcdplayer'];
+    var args = [];
     var options = { cwd: undefined, env: process.env };
     console.log('process.env.PATH:', process.env.PATH );
-    var child = cp.spawn('~/', args, options).on('error', function( err ){ throw err });
+    var child = cp.spawn('ls', args, options).on('error', function( err ){ throw err });
     child.stdout.on('data', function(data) {
     console.log('stdout: ' + data);
     });
