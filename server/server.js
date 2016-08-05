@@ -36,6 +36,7 @@ io.on('connection', function(socket){
     });
     child.on('close', function(code) {
       console.log('closing code: ' + code);
+      child;
     });
   });
 
