@@ -22,7 +22,7 @@ io.on('connection', function(socket){
     console.log('play');
     var args = [];
     var options = { cwd: undefined, env: process.env };
-    var child = cp.spawn('~/omxcdplayer', args, options);
+    var child = cp.spawn('~/omxcdplayer', args, options).on('error', function( err ){ throw err });
     child.stdout.on('data', function(data) {
     console.log('stdout: ' + data);
     });
