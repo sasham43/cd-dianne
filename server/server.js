@@ -9,7 +9,7 @@ var io = require('socket.io')(server);
 var port = 3001;
 
 
-  var omx_process;
+var child;
 
 app.use(express.static('server/public'));
 
@@ -23,7 +23,7 @@ io.on('connection', function(socket){
     var args = [];
     var options = { cwd: undefined, env: process.env };
     // console.log('process.env.PATH:', process.env.PATH );
-    var child = cp.spawn('cdplayer.sh', args, options).on('error', function( err ){ throw err });
+    child = cp.spawn('cdplayer.sh', args, options).on('error', function( err ){ throw err });
     child.stdout.on('data', function(data) {
     console.log('stdout: ' + data);
     });
