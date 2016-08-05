@@ -44,7 +44,7 @@ io.on('connection', function(socket){
 
   socket.on('eject', function(data){
     console.log('eject');
-    if(child.stdin){
+    if(child){
       child.stdin.write('q', function(){
         cp.exec('eject /dev/cdrom', errorLog);
       });
