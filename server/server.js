@@ -20,9 +20,25 @@ app.get('/', function(res, req){
 
 var gpio = require('onoff').Gpio;
 var buttonPlay = new gpio(17, 'in', 'both');
+var buttonPrev = new gpio(15, 'in', 'both');
+var buttonNext = new gpio(16, 'in', 'both');
+var buttonEject = new gpio(18, 'in', 'both');
 
 buttonPlay.watch(function(err, value) {
-  console.log('button press:', value, err);
+  console.log('button play press:', value, err);
+  controls.play;
+});
+buttonPrev.watch(function(err, value) {
+  console.log('button prev press:', value, err);
+  controls.prev;
+});
+buttonNext.watch(function(err, value) {
+  console.log('button next press:', value, err);
+  controls.next;
+});
+buttonEject.watch(function(err, value) {
+  console.log('button eject press:', value, err);
+  controls.eject;
 });
 
 io.on('connection', function(socket){
@@ -39,9 +55,3 @@ io.on('connection', function(socket){
 });
 
 server.listen(port);
-
-function errorLog(error){
-  if(error){
-    console.log('error writing to child.stdin:', error);
-  }
-}
