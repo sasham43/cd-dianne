@@ -18,6 +18,15 @@ app.get('/', function(res, req){
   res.sendFile('./public/index.html');
 });
 
+var gpio = require('pi-gpio');
+
+gpio.open(11, 'input', function(err){
+  gpio.read(11, function(err, value){
+    console.log('err:', err);
+    console.log('value:', value);
+  });
+});
+
 io.on('connection', function(socket){
   socket.on('play', function(data){
     console.log('play');
