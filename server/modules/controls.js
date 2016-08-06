@@ -51,6 +51,13 @@ var eject = function(data){
   trackNumber = 0;
 };
 
+
+function errorLog(error){
+  if(error){
+    console.log('error writing to child.stdin:', error);
+  }
+}
+
 module.exports.play = play;
 module.exports.prev = prev;
 module.exports.next = next;
