@@ -1,6 +1,6 @@
 var express = require('express');
 var cp = require('child_process');
-// var controls = require('./modules/controls.js');
+var controls = require('./modules/controls.js');
 
 var app = express();
 var server = require('http').Server(app);
@@ -25,18 +25,18 @@ buttonPlay.watch(function(err, value) {
   console.log('button press:', value, err);
 });
 
-// io.on('connection', function(socket){
-//   socket.on('play', controls.play);
-//
-//   socket.on('eject', controls.eject);
-//
-//   socket.on('prev', controls.prev);
-//
-//   socket.on('next', controls.next);
-//
-//   console.log('socket connected.');
-//   socket.emit('socket connected');
-// });
+io.on('connection', function(socket){
+  socket.on('play', controls.play);
+
+  socket.on('eject', controls.eject);
+
+  socket.on('prev', controls.prev);
+
+  socket.on('next', controls.next);
+
+  console.log('socket connected.');
+  socket.emit('socket connected');
+});
 
 server.listen(port);
 
