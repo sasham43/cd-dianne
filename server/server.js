@@ -18,14 +18,11 @@ app.get('/', function(res, req){
   res.sendFile('./public/index.html');
 });
 
-var gpio = require('pi-gpio');
+var gpio = require('onoff').GPIO;
+var button = new gpio(11, 'in', 'both');
 
-gpio.open(11, 'input', function(err){
-  gpio.read(11, function(err, value){
-    console.log('err:', err);
-    console.log('value:', value);
-    gpio.close(11);
-  });
+button.watch(function(err, value) {
+  console.log('button press:', value, err);
 });
 
 io.on('connection', function(socket){
