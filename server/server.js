@@ -1,7 +1,6 @@
 var express = require('express');
 var cp = require('child_process');
-// var robot = require('robotjs');
-// var process = require('process');
+// var controls = require('./modules/controls.js');
 
 var app = express();
 var server = require('http').Server(app);
@@ -9,8 +8,9 @@ var io = require('socket.io')(server);
 var port = 3001;
 
 
-var child;
-var trackNumber = 0;
+
+// var child;
+// var trackNumber = 0;
 
 app.use(express.static('server/public'));
 
@@ -19,62 +19,24 @@ app.get('/', function(res, req){
 });
 
 var gpio = require('onoff').Gpio;
-var button = new gpio(17, 'in', 'both');
+var buttonPlay = new gpio(17, 'in', 'both');
 
-button.watch(function(err, value) {
+buttonPlay.watch(function(err, value) {
   console.log('button press:', value, err);
 });
 
-io.on('connection', function(socket){
-  socket.on('play', function(data){
-    console.log('play');
-    var args = ['-track', trackNumber];
-    var options = { cwd: undefined, env: process.env };
-    // console.log('process.env.PATH:', process.env.PATH );
-    if(child){
-      child.stdin.write('q', errorLog);
-    } else {
-      // console.log('track=' + trackNumber + ' cdplayer.sh');
-      child = cp.spawn('cdplayer.sh', args, options).on('error', function( err ){ throw err });
-    }
-    child.stdout.on('data', function(data) {
-      console.log('stdout: ' + data);
-    });
-    child.stderr.on('data', function(data) {
-      console.log('stdout: ' + data);
-    });
-    child.on('close', function(code) {
-      console.log('closing code: ' + code);
-      child = undefined;
-    });
-  });
-
-  socket.on('eject', function(data){
-    console.log('eject');
-    if(child){
-      child.stdin.write('q', function(){
-        cp.exec('eject /dev/cdrom', errorLog);
-      });
-    } else {
-      cp.exec('eject /dev/cdrom', errorLog);
-    }
-    trackNumber = 0;
-  });
-  socket.on('prev', function(data){
-    console.log('prev');
-    child.stdin.write('<', errorLog);
-    trackNumber--;
-  });
-  socket.on('next', function(data){
-    console.log('next');
-    // cp.exec('>', cpLog);
-    child.stdin.write('>', errorLog);
-    trackNumber++;
-  });
-
-  console.log('socket connected.');
-  socket.emit('socket connected');
-});
+// io.on('connection', function(socket){
+//   socket.on('play', controls.play);
+//
+//   socket.on('eject', controls.eject);
+//
+//   socket.on('prev', controls.prev);
+//
+//   socket.on('next', controls.next);
+//
+//   console.log('socket connected.');
+//   socket.emit('socket connected');
+// });
 
 server.listen(port);
 
