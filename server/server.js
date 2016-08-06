@@ -19,7 +19,7 @@ app.get('/', function(res, req){
 });
 
 var gpio = require('onoff').Gpio;
-var button = new gpio(11, 'in', 'both');
+var button = new gpio(17, 'in', 'both');
 
 button.watch(function(err, value) {
   console.log('button press:', value, err);
