@@ -18,7 +18,7 @@ app.get('/', function(res, req){
   res.sendFile('./public/index.html');
 });
 
-var gpio = require('onoff').GPIO;
+var gpio = require('onoff').Gpio;
 var button = new gpio(11, 'in', 'both');
 
 button.watch(function(err, value) {
