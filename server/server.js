@@ -54,9 +54,9 @@ io.on('connection', function(socket){
 
   socket.on('eject', controls.eject);
 
-  socket.on('prev', controls.prev);
+  socket.on('prev', controls.prevTrack);
 
-  socket.on('next', controls.next);
+  socket.on('next', controls.nextTrack);
 
   console.log('socket connected.');
   socket.emit('socket connected');
