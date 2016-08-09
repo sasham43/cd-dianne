@@ -62,6 +62,6 @@ function errorLog(error){
 }
 
 module.exports.play = play;
-module.exports.prev = prev;
-module.exports.next = next;
+module.exports.prevTrack = prevTrack;
+module.exports.nextTrack = nextTrack;
 module.exports.eject = eject;
