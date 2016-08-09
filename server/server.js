@@ -26,19 +26,19 @@ var buttonEject = new gpio(23, 'in', 'both');
 
 buttonPlay.watch(function(err, value) {
   console.log('button play press:', value, err);
-  controls.play;
+  controls.play();
 });
 buttonPrev.watch(function(err, value) {
   console.log('button prev press:', value, err);
-  controls.prev;
+  controls.prev();
 });
 buttonNext.watch(function(err, value) {
   console.log('button next press:', value, err);
-  controls.next;
+  controls.next();
 });
 buttonEject.watch(function(err, value) {
   console.log('button eject press:', value, err);
-  controls.eject;
+  controls.eject();
 });
 
 io.on('connection', function(socket){
