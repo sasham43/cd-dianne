@@ -26,25 +26,25 @@ var buttonEject = new gpio(23, 'in', 'both');
 
 buttonPlay.watch(function(err, value) {
   console.log('button play press:', value, err);
-  if(value === 0){
+  if(value === 1){
     controls.play();
   }
 });
 buttonPrev.watch(function(err, value) {
   console.log('button prev press:', value, err);
-  if(value === 0){
+  if(value === 1){
     controls.prevTrack();
   }
 });
 buttonNext.watch(function(err, value) {
   console.log('button next press:', value, err);
-  if(value === 0){
+  if(value === 1){
     controls.nextTrack();
   }
 });
 buttonEject.watch(function(err, value) {
   console.log('button eject press:', value, err);
-  if(value === 0){
+  if(value === 1){
     controls.eject();
   }
 });
@@ -60,6 +60,11 @@ io.on('connection', function(socket){
 
   console.log('socket connected.');
   socket.emit('socket connected');
+
+  socket.on('disconnect', function(){
+    console.log('disconnected, attempting to reconnect.');
+    io.reconnect();
+  });
 });
 
 server.listen(port);
