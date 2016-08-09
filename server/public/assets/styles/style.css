@@ -39,3 +39,12 @@ button:hover, button:focus{
   /*background-color: blue;*/
   color: white;
 }
+
+ /*media queries*/
+
+ /* Larger than phablet */
+@media (min-width: 550px) {
+  .one-half{
+    width: 48%;
+  }
+}
