@@ -40,11 +40,16 @@ button:hover, button:focus{
   color: white;
 }
 
+.one-half{
+  margin-left: 0;
+}
+
  /*media queries*/
 
  /* Larger than phablet */
 @media (min-width: 1000px) {
   .one-half{
     width: 48%;
+    margin-left: 4%;
   }
 }
