@@ -18,7 +18,7 @@ var play = function(data){
     console.log('stdout: ' + data);
   });
   child.stderr.on('data', function(data) {
-    console.log('stdout: ' + data);
+    console.log('stderr: ' + data);
   });
   child.on('close', function(code) {
     console.log('closing code: ' + code);

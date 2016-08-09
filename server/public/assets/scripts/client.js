@@ -5,6 +5,11 @@ $(function(){
     console.log('socket connected');
   });
 
+  socket.on('disconnect', function(data){
+    console.log('socket disconnected, attempting reconnect...');
+    socket.reconnect();
+  });
+
   $(".play").on("click", function(){
     socket.emit('play');
   });
