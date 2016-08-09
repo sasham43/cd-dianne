@@ -22,7 +22,7 @@ var gpio = require('onoff').Gpio;
 var buttonPlay = new gpio(17, 'in', 'both');
 var buttonPrev = new gpio(15, 'in', 'both');
 var buttonNext = new gpio(16, 'in', 'both');
-var buttonEject = new gpio(18, 'in', 'both');
+var buttonEject = new gpio(23, 'in', 'both');
 
 buttonPlay.watch(function(err, value) {
   console.log('button play press:', value, err);
