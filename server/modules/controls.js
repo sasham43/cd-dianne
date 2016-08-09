@@ -26,17 +26,20 @@ var play = function(data){
   });
 };
 
-var prev = function(data){
+var prevTrack = function(data){
   console.log('prev');
-  child.stdin.write('<', errorLog);
-  trackNumber--;
+  if(child){
+    child.stdin.write('<', errorLog);
+    trackNumber--;
+  }
 };
 
-var next = function(data){
+var nextTrack = function(data){
   console.log('next');
-  // cp.exec('>', cpLog);
-  child.stdin.write('>', errorLog);
-  trackNumber++;
+  if(child){
+    child.stdin.write('>', errorLog);
+    trackNumber++;
+  }
 };
 
 var eject = function(data){
