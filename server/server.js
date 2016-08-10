@@ -30,18 +30,21 @@ buttonPlay.watch(function(err, value) {
     controls.play();
   }
 });
+
 buttonPrev.watch(function(err, value) {
   console.log('button prev press:', value, err);
   if(value === 1){
     controls.prevTrack();
   }
 });
+
 buttonNext.watch(function(err, value) {
   console.log('button next press:', value, err);
   if(value === 1){
     controls.nextTrack();
   }
 });
+
 buttonEject.watch(function(err, value) {
   console.log('button eject press:', value, err);
   if(value === 1){
