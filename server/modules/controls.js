@@ -3,6 +3,10 @@ var cp = require('child_process');
 var child;
 var trackNumber = 0;
 
+var emit_status = function(message){
+  socket.emit('status', message);
+};
+
 var play = function(data){
   console.log('play');
   var args = ['-track', trackNumber];
@@ -14,6 +18,7 @@ var play = function(data){
     // console.log('track=' + trackNumber + ' cdplayer.sh');
     child = cp.spawn('cdplayer.sh', args, options).on('error', function( err ){ throw err });
   }
+  emit_status({status:'PLAYING', track: trackNumber});
   child.stdout.on('data', function(data) {
     console.log('stdout: ' + data);
   });
@@ -31,6 +36,7 @@ var prevTrack = function(data){
   if(child){
     child.stdin.write('<', errorLog);
     trackNumber--;
+    emit_status({status:'PLAYING', track: trackNumber});
   }
 };
 
@@ -39,6 +45,7 @@ var nextTrack = function(data){
   if(child){
     child.stdin.write('>', errorLog);
     trackNumber++;
+    emit_status({status:'PLAYING', track: trackNumber});
   }
 };
 
@@ -52,6 +59,7 @@ var eject = function(data){
     cp.exec('eject /dev/cdrom', errorLog);
   }
   trackNumber = 0;
+  emit_status({status: 'STOPPED', track: trackNumber });
 };
 
 

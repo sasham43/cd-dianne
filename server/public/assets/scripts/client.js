@@ -10,6 +10,11 @@ $(function(){
     socket.reconnect();
   });
 
+  socket.on('status', function(data){
+    $("#status").html(data.status);
+    $("#track").html(data.track);    
+  });
+
   $(".play").on("click", function(){
     socket.emit('play');
   });
