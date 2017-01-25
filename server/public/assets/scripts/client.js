@@ -11,6 +11,7 @@ $(function(){
   });
 
   socket.on('status', function(data){
+    console.log('status:', data);
     $("#status").html(data.status);
     $("#track").html(data.track);
   });

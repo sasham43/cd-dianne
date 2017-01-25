@@ -62,6 +62,7 @@ io.on('connection', function(socket){
   socket.on('next', controls.nextTrack);
 
   socket.on('get status', function(){
+    console.log('get status:', controls.status);
     socket.emit('status', controls.status);
   });
 
