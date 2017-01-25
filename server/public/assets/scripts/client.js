@@ -12,20 +12,32 @@ $(function(){
 
   socket.on('status', function(data){
     $("#status").html(data.status);
-    $("#track").html(data.track);    
+    $("#track").html(data.track);
   });
 
   $(".play").on("click", function(){
     socket.emit('play');
+    window.setTimeout(2000, function(){
+      socket.emit('get status');
+    });
   });
   $(".prev").on("click", function(){
     socket.emit('prev');
+    window.setTimeout(2000, function(){
+      socket.emit('get status');
+    });
   });
   $(".next").on("click", function(){
     socket.emit('next');
+    window.setTimeout(2000, function(){
+      socket.emit('get status');
+    });
   });
   $(".eject").on("click", function(){
     socket.emit('eject');
+    window.setTimeout(2000, function(){
+      socket.emit('get status');
+    });
   });
 
   console.log('loaded.');

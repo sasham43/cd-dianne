@@ -1,10 +1,11 @@
 var cp = require('child_process');
 
 var child;
+var message;
 var trackNumber = 0;
 
-var emit_status = function(message){
-  socket.emit('status', message);
+var emit_status = function(input){
+  message = input;
 };
 
 var play = function(data){
@@ -73,3 +74,4 @@ module.exports.play = play;
 module.exports.prevTrack = prevTrack;
 module.exports.nextTrack = nextTrack;
 module.exports.eject = eject;
+module.exports.status = message;
