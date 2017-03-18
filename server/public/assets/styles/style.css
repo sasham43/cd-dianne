@@ -20,6 +20,10 @@ button:hover, button:focus{
   color: #333;
 }
 
+.container {
+  padding: 5%;
+}
+
 .play{
   /*background-color: rebeccapurple;*/
   color: white;
