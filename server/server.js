@@ -75,4 +75,6 @@ io.on('connection', function(socket){
   });
 });
 
-server.listen(port);
+server.listen(port, function(){
+  console.log('listening on port 3001...')
+});
